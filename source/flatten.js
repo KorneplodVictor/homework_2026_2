@@ -8,6 +8,14 @@
  * // returns [1, 2, 3, 4, 5, 6]
  * flatten([1, [2, [3, 4], 5], 6]);
  *
+ * @throws {TypeError} если аргумент не является массивом
+ *
  * @returns {Array}
  */
-const flatten = array => array.flatMap(item => (Array.isArray(item) ? flatten(item) : item));
+const flatten = array => {
+    if (!Array.isArray(array)) {
+        throw new TypeError('flatten: ожидается массив');
+    }
+
+    return array.flatMap(item => (Array.isArray(item) ? flatten(item) : item));
+};

@@ -39,4 +39,13 @@ QUnit.module("Тестируем функцию flatten", function() {
         assert.deepEqual(source, [1, [2, [3]]], 'исходный массив остался прежним');
         assert.notStrictEqual(result, source, 'возвращается новый массив');
     });
+
+    QUnit.test("Бросает TypeError, если аргумент не является массивом", function(assert) {
+        assert.throws(() => flatten(), TypeError, 'flatten() без аргумента');
+        assert.throws(() => flatten(undefined), TypeError, 'flatten(undefined)');
+        assert.throws(() => flatten(null), TypeError, 'flatten(null)');
+        assert.throws(() => flatten(42), TypeError, 'flatten(42)');
+        assert.throws(() => flatten('123'), TypeError, 'flatten("123")');
+        assert.throws(() => flatten({ 0: 1, length: 1 }), TypeError, 'flatten({ 0: 1, length: 1 })');
+    });
 });
