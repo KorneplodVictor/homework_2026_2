@@ -17,5 +17,13 @@ const flatten = array => {
         throw new TypeError('flatten: ожидается массив');
     }
 
-    return array.flatMap(item => (Array.isArray(item) ? flatten(item) : item));
+    return array.reduce((result, item) => {
+        if (Array.isArray(item)) {
+            result.push(...flatten(item));
+        } else {
+            result.push(item);
+        }
+
+        return result;
+    }, []);
 };
